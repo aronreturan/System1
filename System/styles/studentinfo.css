@@ -169,6 +169,29 @@ body {
     border-radius: 12px;
     border: 1px solid #f0f0f0;
 }
+/*ginawa ko pre*/
+.student-table {
+    width: 100%;
+    border-collapse: collapse; 
+    background: white;
+    border-radius: 12px;
+    overflow: hidden; 
+    border: 1px solid #f0f0f0;
+}
+
+
+.student-table th {
+    padding: 15px 20px; 
+    text-align: left;
+    color: #252728b2;
+    font-weight: bold;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+
+.table-card {
+    background-color: #fafafa; 
+}
 
 .student-container {
     gap: 15px;
