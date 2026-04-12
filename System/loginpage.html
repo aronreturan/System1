@@ -13,9 +13,15 @@
 
   <div class="login-container">
     <div class="login-header">
-      <h2>Admin Login</h2>
-      <p>Enter your credentials to access the system</p>
+      <h2>BSHM Monitoring System</h2>
+      <p>Select your role to access the system</p>
     </div>
+
+  <div class="role-selection">
+    <button class="admin-btn">Admin</button>
+    <button class="teacher-btn">Instructor</button>
+    <button class="student-btn">Student</button>
+  </div>
 
     <form class="login-form">
       <div class="input-group">
@@ -43,16 +49,37 @@
     </div>
   </div>
 
-  <script>
-    const loginForm = document.querySelector('.login-form');
+    <script>
+      const loginForm = document.querySelector('.login-form');
+      const roleButtons = document.querySelectorAll('.role-selection button');
+      const signInBtn = document.querySelector('.sign-in-btn');
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const demoUserLabel = document.querySelector('.login-footer strong:nth-of-type(1)');
+      const demoPassLabel = document.querySelector('.login-footer strong:nth-of-type(2)');
 
+      roleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          roleButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+
+          const role = button.innerText;
+          signInBtn.innerText = `Sign In as ${role}`;
+          usernameInput.placeholder = `Enter ${role.toLowerCase()} username`;
+          passwordInput.placeholder = `Enter ${role.toLowerCase()} password`;
+          const roleLower = role.toLowerCase();
+        demoUserLabel.innerText = roleLower;
+        demoPassLabel.innerText = roleLower + '123';
+      });
+    });
     loginForm.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const username = document.getElementById('username').value;
-      const password = document.getElementById('password').value;
+      const username = usernameInput.value;
+      const password = passwordInput.value;
+      const activeRole = document.querySelector('.role-selection button.active').innerText.toLowerCase();
 
-      if (username.length > 30 ) {
+      if (username.length > 30) {
         alert('Username cannot be more than 30 characters');
         return;
       }
@@ -62,15 +89,14 @@
         return;
       }
 
-
-      if (username === 'admin' && password === 'admin123') {
-
+      if (username === activeRole && password === activeRole + '123') {
         window.location.href = 'homepage.html';
       } else {
-        alert('Invalid credentials. Please try again!');
+        alert(`Invalid ${activeRole} credentials. Please try again!`);
       }
     });
-  </script>
-</body>
+    </script>
+    
+  </body>
 
 </html>
